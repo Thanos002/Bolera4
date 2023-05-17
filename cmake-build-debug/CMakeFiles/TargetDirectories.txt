@@ -1,0 +1,3 @@
+C:/Users/thano/Universidad Politécnica de Madrid/Bolera 4 - General/Software/Bolera4/Bolera4/cmake-build-debug/CMakeFiles/Bolera4.dir
+C:/Users/thano/Universidad Politécnica de Madrid/Bolera 4 - General/Software/Bolera4/Bolera4/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/thano/Universidad Politécnica de Madrid/Bolera 4 - General/Software/Bolera4/Bolera4/cmake-build-debug/CMakeFiles/rebuild_cache.dir

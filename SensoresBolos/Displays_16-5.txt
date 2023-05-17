@@ -1,0 +1,146 @@
+/*
+ * Displays.c
+ *
+ * Created: 15/05/2023 17:28:39
+ * Author : mrjav
+ */ 
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+uint16_t parpadeos=0;
+volatile uint8_t activar_unidades = 1;
+uint16_t puntuacion;
+uint16_t pulsador;
+// uint16_t parpadeo_actual=0;
+
+void setup(){
+// 	cli();
+// 	DDRB = 0xFF; // 0b11111111 todo salidas desde Da hasta Dg y DS
+// 	PORTB = 0x40; // 0b01000000 encendidos(0) todos menos Dg (un 0 en 7 segmentos) con DS lo inicializamos a 0 pero tendremos que ir alternandolo
+// 	TCCR0A = 0x02; // 0b00000010 Timer 0 en modo CTC
+// 	TCCR0B = 0x01; // 0b00000000 sin preescalado
+// 	OCR0A = 78; // reloj de 8 MHz
+// 	sei();
+
+	cli();
+	DDRB = 0xFF; // 0b11111111 todo salidas desde Da hasta Dg y DS
+	PORTB = 0x40; // 0b01000000 encendidos(0) todos menos Dg (un 0 en 7 segmentos) con DS lo inicializamos a 0 pero tendremos que ir alternandolo
+	TCCR0A = 0x02; // 0b00000010 Timer 0 en modo CTC
+	TCCR0B = 0x03; // 0b00000000 preescalado 64
+	OCR0A = 124; // reloj de 8 MHz
+	TIMSK0 = (1 << OCIE0A); //0b00000010
+	sei();
+}
+
+
+
+
+const uint8_t tablasegmentos[] = {
+	0b01000000, // 0
+	0b01111001, // 1
+	0b00100100, // 2
+	0b00110000, // 3
+	0b00011001, // 4
+	0b00010010, // 5
+	0b00000100, // 6
+	0b01111000, // 7
+	0b00000000, // 8
+	0b00010000  // 9
+};
+
+void mostrar_digito(uint8_t digito, uint16_t unid_dec)
+{
+	// Mapear el valor del dígito a la tabla de segmentos
+	uint8_t segmentos = tablasegmentos[digito];
+
+	if (activar_unidades) {
+		if(unid_dec){
+			PORTB = segmentos;
+			PORTB |= (1 << PD7);    // si son unidades se mete un 1 en DS
+		}
+		// 		else{
+		// 			PORTB = segmentos;
+		// 			PORTB &= ~(1 << PD7);   // si son decenas se mete un 0 en DS
+		// 		}
+	}
+	else {
+		if(unid_dec == 0){
+			PORTB = segmentos;
+			PORTB &= ~(1 << PD7);   // si son decenas se mete un 0 en DS
+		}
+		// 		else{
+		// 		PORTB = segmentos;
+		// 		PORTB &= ~(1 << PD7);   // si son decenas se mete un 0 en DS
+		// 		}
+	}
+
+}
+
+
+void mostrar_numero(uint16_t puntuacion_1)
+{
+	// Extraer cada dígito del número y mostrarlo en el display
+	uint8_t digito_unidad = puntuacion_1 % 10;
+	mostrar_digito(digito_unidad,1);
+
+	uint8_t digito_decena = (puntuacion_1 / 10) % 10;
+	mostrar_digito(digito_decena,0);
+
+}
+
+
+
+
+
+ISR(TIMER0_COMPA_vect){
+	activar_unidades = !activar_unidades;
+	parpadeos++;
+	
+	if(pulsador){
+		if(parpadeos <= 180){
+			mostrar_numero(puntuacion); // Encender los displays
+		}
+		else if(parpadeos <= 200){
+			PORTB = 0xFF;  // Apagados menos DS que habra que verlo
+		}
+		if(parpadeos >= 200){
+			parpadeos = 0; // Reiniciar el contador de parpadeos
+		}
+		
+	}
+	
+}
+
+// ISR(TIMER0_COMPA_vect)
+// {
+// 	activar_unidades = !activar_unidades;
+//
+// 	parpadeos++;
+//
+// 	if (parpadeos <= 9) {
+// 		// Encender los displays
+// 		// parpadeo_actual = 1;
+// 	}
+// 	else if (parpadeos <= 10) {
+// 		PORTB = 0xFF;  // Apagados menos DS que habra que verlo
+// 		// parpadeo_actual = 0;
+// 	}
+//
+// 	if (parpadeos >= 10) {
+// 		parpadeos = 0; // Reiniciar el contador de parpadeos
+// 	}
+//  }
+
+
+
+int main(void)
+{
+    setup();
+	uint16_t numero = 13;
+    while (1) 
+    {
+		mostrar_numero(numero);
+    }
+}
+
