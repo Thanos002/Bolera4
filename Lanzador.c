@@ -15,7 +15,7 @@
 
 Position position = LEFT;
 volatile uint32_t ms_elapsed = 0;
-uint16_t button_check_delay_ms = 50;
+uint16_t button_check_delay_ms = 60;
 uint16_t debounce_buffer_ms = 50;
 uint32_t buffer =0;
 
@@ -58,6 +58,7 @@ void middleInterrupt(){
 	}
 }
 
+// interrupcion del pulsador a la izquierda
 void leftInterrupt(){
 	if(state==LANZAMIENTO  || state == PARPADEO){
 		girarVertical(1);  // cambiar de direccion en lanzamiento
@@ -93,6 +94,7 @@ ISR(PCINT0_vect)
 			else if (position==LEFT){  // si estoy LEFT
 				middleInterrupt();
 			}
+			break;
 			case 0:
 			// si estoy moviendo hacia la izquierda y estoy LEFT
 			if (position==LEFT){
@@ -102,6 +104,7 @@ ISR(PCINT0_vect)
 			else if (position==RIGHT){
 				middleInterrupt();
 			}
+			break;
 			case 2:  // parado
 			if(position == LEFT){
 				leftInterrupt();
@@ -109,6 +112,9 @@ ISR(PCINT0_vect)
 			else{
 				rightInterrupt();
 			}
+			break;
+			default:
+				lanzadorFlag=2;
 		}
 	}
 }
@@ -135,7 +141,7 @@ int LanzadorLoop(void)
 			
 			// Aqui: verficiar que bola esta cargada:
 			// state = BOLA_LANZADOR
-			
+			break;
 			case BOLA_LANZADOR:
 			// proceso para enganchar la bola en el lanzador
 
@@ -171,7 +177,8 @@ int LanzadorLoop(void)
 			
 			state = LANZAMIENTO; // empezar lanzamiento
 			buffer = ms_elapsed;  // timer de 30 segundos
-			
+			break;			
+
 			case LANZAMIENTO:
 			
 			// encender LED
@@ -184,7 +191,7 @@ int LanzadorLoop(void)
 			loop_until_bit_is_set(SW6PIN,SW6X);  //esperar hasta se pulsa el disparo
 			// cuando se interumpe, marcar state=TIRAR_BOLA
 			state = TIRAR_BOLA;
-
+			break;
 			
 			case PARPADEO:
 			// lanzamiento con parpadeo
@@ -198,8 +205,10 @@ int LanzadorLoop(void)
 			}
 			// TODO: Cuando se pulsa el interruptor, cambiar a TIRAR_BOLA
 			// cuando se interumpe, marcar state=TIRAR_BOLA
+
 			state = TIRAR_BOLA;
-			
+			break;
+
 			case TIRAR_BOLA:
 			// El interruptor de disparo se ha pulsado
 			apagarLED();
@@ -208,6 +217,7 @@ int LanzadorLoop(void)
 			liberarCarrito();
 			_delay_ms(2000);
 			pararCarrito();
+			break;
 		}
 	}
 }

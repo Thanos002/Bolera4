@@ -82,10 +82,13 @@ int main(void)
 
 ISR(TIMER1_COMPA_vect){
 	updateTime();
-	if (getTime() >500){
-		toggleBit(L1PORT,L1X);
+	if (getTime() % 100 <40){
+		encenderLED();
 		s1state = getSensor1();
 		s2state = getSensor2();
 		s3state = getSensor3();
+	}
+	else{
+	apagarLED();
 	}
 }

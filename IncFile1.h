@@ -92,7 +92,7 @@
 	#define M3_diPORT	PORTL
 	#define M3_diDDR	DDRL
 	#define M3_diPIN	PINL
-	#define M3_di_X		PL3
+	#define M3_di_X		PL2
 
 	#define M3_enPORT	PORTL
 	#define M3_enDDR	DDRL
@@ -143,38 +143,45 @@
 	#define L1PIN		PINL
 	#define L1X			PL6
 
-	#define DaPORT		PB0
-	#define DaDDR		DDB0
-	#define DaPIN		PINB0
+	#define DaPORT		PORTB
+	#define DaDDR		DDRB
+	#define DaPIN		PINB
+	#define DaX			PB0
 	
-	#define DbPORT		PB1
-	#define DbDDR		DDB1
-	#define DbPIN		PINB1
+	#define DbPORT		PORTB
+	#define DbDDR		DDRB
+	#define DbPIN		PINB
+	#define DbX			PB1
 	
-	#define DcPORT		PB2
-	#define DcDDR		DDB2
-	#define DcPIN		PINB2
+	#define DcPORT		PORTB
+	#define DcDDR		DDRB
+	#define DcPIN		PINB
+	#define DbX			PB2
 	
-	#define DdPORT		PB3
-	#define DdDDR		DDB3
-	#define DdPIN		PINB3
+	#define DdPORT		PORTB
+	#define DdDDR		DDRB
+	#define DdPIN		PINB
+	#define DbX			PB3
 	
-	#define DePORT		PB4
-	#define DeDDR		DDB4
-	#define DePIN		PINB4
-	
-	#define DfPORT		PB5
-	#define DfDDR		DDB5
-	#define DfPIN		PINB5
-	
-	#define DgPORT		PB6
-	#define DgDDR		DDB6
-	#define DgPIN		PINB6
-	
-	#define DSPORT		PB7
-	#define DSDDR		DDB7
-	#define DSPIN		PINB7
+	#define DePORT		PORTB
+	#define DeDDR		DDRB
+	#define DePIN		PINB
+	#define DbX			PB4
 
+	#define DfPORT		PORTB
+	#define DfDDR		DDRB
+	#define DfPIN		PINB
+	#define DbX			PB5
+	
+	#define DgPORT		PORTB
+	#define DgDDR		DDRB
+	#define DgPIN		PINB
+	#define DbX			PB6
+	
+	#define DSPORT		PORTB
+	#define DSDDR		DDRB
+	#define DSPIN		PINB
+	#define DSX			PB7
 
 //MACROS:
 // B bit; P registro (p.e. D), V valor, interrupcion I

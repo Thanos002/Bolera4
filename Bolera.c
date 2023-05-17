@@ -88,7 +88,7 @@ void bajarBola();
 // Sensor SW1:
 
 int getSensor1(){
-	return readBit(SW1X,SW1PIN);
+	return readBit(SW1PIN,SW1X);
 }
 
 // Sensor SW2:
