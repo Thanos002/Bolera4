@@ -78,5 +78,6 @@ int getOptico(int num);
 
 void encenderLED();
 void apagarLED();
+void parpadearLED();
 
 #endif // BOLERA_H

@@ -18,12 +18,13 @@ void lanzadorHome();
 void rightInterrupt();
 void middleInterrupt();
 void leftInterrupt();
+uint8_t getParpadeo();
 
 void updateTime();
 void setTime(int time);
 uint32_t getTime();
 
-typedef enum {SIN_BOLA, BOLA_LANZADOR, LANZAMIENTO, TIRAR_BOLA, PARPADEO} States;
+typedef enum {SIN_BOLA, BOLA_LANZADOR, LANZAMIENTO, TIRAR_BOLA} States;
 extern States state;
 
 typedef enum {LEFT, RIGHT} Position;

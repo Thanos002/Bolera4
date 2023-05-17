@@ -14,6 +14,9 @@ uint8_t display_number;
 int s1state;
 int s2state;
 int s3state;
+int s4state;
+int s5state;
+int s6state;
 
 void setup(){
 	enableInterrupt(SW2EIFR);
@@ -56,7 +59,7 @@ int main(void)
 	* M3: moverVastago
 	* M4: parar Vastago 
 	 */
-	while (0)
+	while (1)
 	{
 		setTime(0);
 		apagarLED();
@@ -68,6 +71,10 @@ int main(void)
 		girarVertical(1);
 		_delay_ms(500);
 		girarVertical(0);
+		_delay_ms(200);
+		girarVertical(1);
+		_delay_ms(200);
+		girarVertical(0);
 		_delay_ms(500);
 		frenoVertical();
 		_delay_ms(500);
@@ -75,20 +82,19 @@ int main(void)
 		_delay_ms(500);
 		moverVastagoAtras();
 		_delay_ms(500);
-		moverVastagoAdelante();
 		getSensor1();
 	}
 }
 
 ISR(TIMER1_COMPA_vect){
 	updateTime();
-	if (getTime() % 100 <40){
-		encenderLED();
-		s1state = getSensor1();
-		s2state = getSensor2();
-		s3state = getSensor3();
+	if(getParpadeo()){
+		parpadearLED();
 	}
-	else{
-	apagarLED();
-	}
+	s1state = getSensor1();
+	s2state = getSensor2();
+	s3state = getSensor3();
+	s4state = getSensor4();
+	s6state = getSensor6();
+	s5state = getSensor5();
 }

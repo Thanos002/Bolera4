@@ -144,3 +144,4 @@ void encenderLED(){
 void apagarLED(){
 	clearBit(L1PORT, L1X);
 }
+

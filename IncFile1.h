@@ -14,6 +14,10 @@
 */
 /************************************************************************/
 
+// CONSTANTES
+#define button_check_delay_ms 60
+#define debounce_buffer_ms 50
+
 
 //PORTS:
 
@@ -41,7 +45,7 @@
 	#define SW4PORT PORTD
 	#define SW4DDR	DDRD
 	#define SW4PIN	PIND
-	#define SW4X	PD2
+	#define SW4X	PD4   // cambio!
 	
 	#define SW5PORT PORTD
 	#define SW5DDR	DDRD
@@ -51,14 +55,14 @@
 	#define SW6PORT PORTD
 	#define SW6DDR	DDRD
 	#define SW6PIN	PIND
-	#define SW6X	PD4
+	#define SW6X	PD2  //cambio!
 	
 	#define SWEICR 	EICRA //configurar en función de las necesidades
 	#define SWEIMSK EIMSK //0b00001111
 	
 	#define SW2EIFR INTF0
 	#define SW3EIFR INTF1
-	#define SW4EIFR INTF2
+	#define SW6EIFR INTF2  // cambio
 	#define SW5EIFR INTF3
 
 
@@ -156,27 +160,27 @@
 	#define DcPORT		PORTB
 	#define DcDDR		DDRB
 	#define DcPIN		PINB
-	#define DbX			PB2
+	#define DcX			PB2
 	
 	#define DdPORT		PORTB
 	#define DdDDR		DDRB
 	#define DdPIN		PINB
-	#define DbX			PB3
+	#define DdX			PB3
 	
 	#define DePORT		PORTB
 	#define DeDDR		DDRB
 	#define DePIN		PINB
-	#define DbX			PB4
+	#define DeX			PB4
 
 	#define DfPORT		PORTB
 	#define DfDDR		DDRB
 	#define DfPIN		PINB
-	#define DbX			PB5
+	#define DfX			PB5
 	
 	#define DgPORT		PORTB
 	#define DgDDR		DDRB
 	#define DgPIN		PINB
-	#define DbX			PB6
+	#define DgX			PB6
 	
 	#define DSPORT		PORTB
 	#define DSDDR		DDRB
