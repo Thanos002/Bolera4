@@ -19,6 +19,7 @@ uint32_t last_interruption_time = 0;
 uint32_t buffer =0;
 uint8_t parpadear =0;
 
+// setup para el lanzador 
 void setupLanzador(){
 	cli();
 	enableInterrupt(SW2EIFR);  // set EIMSK for SW2
@@ -35,7 +36,7 @@ void lanzadorHome(){
 }
 
 // interrupcion del fin de carrera derecho,
-void rightInterrupt(){
+inline void rightInterrupt(){
 	if(state==LANZAMIENTO){  // si estamos en lanzamiento, cambiamos direccion
 		girarVertical(0);
 	}
@@ -45,7 +46,7 @@ void rightInterrupt(){
 }
 
 // interrupcion del pulsador medio
-void middleInterrupt(){
+inline void middleInterrupt(){
 	if(position==LEFT)	{
 		position = RIGHT;  // cambiar position flag, que ahora estamos a la derecha
 	}
@@ -61,7 +62,7 @@ void middleInterrupt(){
 }
 
 // interrupcion del pulsador a la izquierda
-void leftInterrupt(){
+inline void leftInterrupt(){
 	if(state==LANZAMIENTO){
 		girarVertical(1);  // cambiar de direccion en lanzamiento
 	}
@@ -74,18 +75,24 @@ void leftInterrupt(){
 inline void updateTime(){
 	ms_elapsed += 10;
 }
+
+// setter para el tiempo acual
 inline void setTime(int time){
 	ms_elapsed = time;
 }
+// getter para el valor del tiempo actual
 inline uint32_t getTime(){
 	return ms_elapsed;
 }
 
+// getter para la bandera parpadear
 inline uint8_t getParpadeo(){
 	return parpadear;
 }
 
-void parpadearLED(){
+// funcion que, si esta llamada, actualiza el estado de la led, para que esta parpadeando
+// llamar la funcion mediante interrupciones temporales (resolucion <50ms)
+inline void parpadearLED(){
 	if(ms_elapsed % 1000 < 900){
 		apagarLED();
 	}
@@ -94,8 +101,12 @@ void parpadearLED(){
 	}
 }
 
+// interrupcion para el boton de disparo
+// incluye proteccion, se atiende solo cuando estamos en LANZAMIENTO
 ISR(PCINT2_vect){
-	state = TIRAR_BOLA;
+	if(state == LANZAMIENTO){
+		state = TIRAR_BOLA;
+	}
 }
 
 // interrupcon del SW2 que sirva para distinguir que pulsador se ha pulsado
@@ -140,13 +151,14 @@ ISR(PCINT0_vect)
 }
 
 // Explicacion de los estados:
+// SIN_BOLA: la bola esta en el elevador de cargas, pero no en el lanzador
 // BOLA_LANZADOR: la bola esta colocada en el lanzador
 // LANZAMIENTO: el sistema se encuentra el el proceso de lanzar la bola
 // TIRAR_BOLA: la bola fue lanzada para tirar los bolos
 
 States state = SIN_BOLA;
 
-// bucle con estados que debe ser integrado con los otros componentes
+// Integracion: bucle con estados que debe ser integrado con los otros componentes
 int LanzadorLoop(void)
 {
 	lanzadorHome();  // comprobar si se puede hacer el home de manera segura (ELEVADOR)
@@ -203,13 +215,16 @@ int LanzadorLoop(void)
 			
 			// encender LED
 			encenderLED();
-
+			
+			// despues de 30 seg. se habilita la bandera parpadear
+			// Integracion: posiblemente sacarlo de los estados al nivel del main, asi se acualiza independientemente del estado
 			if(buffer+30000<ms_elapsed){
 				parpadear = 1;
 			}
 			girarVertical(0);
 			girarVertical(1);
 			// esperar interupciones
+			// alternativa: atender mediante interrupcion de SW6 (PCINT2)
 			loop_until_bit_is_set(SW6PIN,SW6X);  //esperar hasta se pulsa el disparo
 			// cuando se interumpe, marcar state=TIRAR_BOLA
 			state = TIRAR_BOLA;
@@ -217,14 +232,22 @@ int LanzadorLoop(void)
 			break;
 			
 			case TIRAR_BOLA:
+			// asegurar que estamos a la izquierda del Lanzador:
+			if(position==RIGHT){
+				state = LANZAMIENTO;  // si no, procedemos con el lanzamiento
+				girarVertical(0);  // opcional: intentar corregir posicion
+				break;
+			}
+			
 			// El interruptor de disparo se ha pulsado
 			apagarLED();
 			frenoVertical();
 			_delay_ms(button_check_delay_ms);
 			liberarCarrito();
-			_delay_ms(2000);
+			_delay_ms(long_delay);
 			pararCarrito();
 
+			// si hemos tirado la bola y estamos en el ultimo disparo
 			if(parpadear){
 				// state=FINAL;
 				// IMPLEMENTAR!

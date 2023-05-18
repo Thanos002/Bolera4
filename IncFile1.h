@@ -7,22 +7,20 @@
 
 /************************************************************************/
 /*  Instrucciones:                                                                     
-*	Los Macros PORT, DDR, PIN solo guardan el numero del pin correspondiente
-*	Los Macros SWnX tienen la letra del port/pin (D = PORTD)
-*	Esto se puede usar con setInput(SW1X,PORT) = setInput(DDR
-*   Usar funciones L2***(L) para obtener la direccion del PORT(L)/PIN(L)...
+*	Los Macros PORT, DDR, PIN guardan el registro correspondiente
+*	Los Macros SWnX tienen el numero del pin
+*	Esto se puede usar con setInput(SW1PORT,SW1X) = setInput(PORTD,PD6)
 */
 /************************************************************************/
-
 // CONSTANTES
 #define button_check_delay_ms 60
 #define debounce_buffer_ms 50
+#define long_delay 2000
 
+/************************************************************************/
+//MACROS SW
 
-//PORTS:
-
-//MACROS SW PORTS
-
+	// deprecated
 	//#define L2DDR(L)	DD##L
 	//#define L2PIN(L)	PIN##L
 	//#define L2PORT(L)	PORT##L
@@ -65,7 +63,7 @@
 	#define SW6EIFR INTF2  // cambio
 	#define SW5EIFR INTF3
 
-
+/************************************************************************/
 //MACROS Motores
 
 	#define M1_diPORT	PORTK
@@ -123,7 +121,7 @@
 	#define M5_enPIN	PIND
 	#define M5_en_X		PD7
 
-
+/************************************************************************/
 // MACROS Sensores Opticos
 
 	#define SOPCICR		PCICR //0b00000100
@@ -139,7 +137,7 @@
 	#define SOPIN		PINK
 	
 
-
+/************************************************************************/
 //MACROS LEDs y Display
 
 	#define L1PORT		PORTL
@@ -187,6 +185,7 @@
 	#define DSPIN		PINB
 	#define DSX			PB7
 
+/************************************************************************/
 //MACROS:
 // B bit; P registro (p.e. D), V valor, interrupcion I
 #define setBit(P, B) (P |= (1 << B))

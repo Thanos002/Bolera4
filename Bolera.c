@@ -12,6 +12,7 @@
 // *******
 
 // M1: Elevador de Cargas
+// Implementar las funciones aqui (Iago)
 void subirElevadorCargas();
 
 void bajarElevadorCargas();
@@ -21,6 +22,7 @@ void pararElevadorCargas();
 
 // M2: Giro vertical del lanzador
 
+// default: lanzadorflag a 2 (=parado)
 uint8_t lanzadorFlag = 2;
 
 void girarVertical(int dir){
@@ -40,6 +42,7 @@ void girarVertical(int dir){
 void frenoVertical(){  // frenado instataneo
 	lanzadorFlag = 2;
 	setBit(M2_bkPORT,M2_bk_X);
+	setBit(M2_enPORT,M4_en_X);
 }
 
 void pararVertical(){  // se utiliza para deshabilitar el motor
@@ -49,34 +52,37 @@ void pararVertical(){  // se utiliza para deshabilitar el motor
 
 // M3: Vastago
 
-void moverVastagoAdelante(){  //comprobar
+inline void moverVastagoAdelante(){
+	pararVastago();
 	setBit(M3_diPORT, M3_di_X);
 	setBit(M3_enPORT, M3_en_X);
 }
-void moverVastagoAtras(){
+inline void moverVastagoAtras(){
+	pararVastago();
 	clearBit(M3_diPORT, M3_di_X);
 	setBit(M3_enPORT, M3_en_X);
 }
-void pararVastago(){
+inline void pararVastago(){
 	clearBit(M3_enPORT, M3_en_X);
 }
 
 // M4: Carrito
 
-void engancharCarrito(){
-	setBit(M4_diPORT, M4_di_X);  //comprobar
+inline void engancharCarrito(){
+	setBit(M4_diPORT, M4_di_X);
 	setBit(M4_enPORT, M4_en_X);
 }
-void liberarCarrito(){
+inline void liberarCarrito(){
 	clearBit(M4_diPORT, M4_di_X);
 	setBit(M4_enPORT, M4_en_X);
 }
-void pararCarrito(){
+inline void pararCarrito(){
 	clearBit(M4_enPORT, M4_en_X);
 }
 
 // M5: Elevador de retorno de bolas
 
+// Implementar funciones (Iago)
 void elevarBola();
 void bajarBola();
 
@@ -84,7 +90,7 @@ void bajarBola();
 // SENSORES SW
 // *******
 
-
+// getters para los sensores (leer pins directamente)
 // Sensor SW1:
 
 int getSensor1(){
@@ -128,7 +134,7 @@ int getSensor6(){
 
 //MACROS
 
-
+// getter para los sensores opticos
 int getOptico(int num){
 	return readBit(SOPIN, num);
 }

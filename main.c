@@ -88,6 +88,7 @@ int main(void)
 
 ISR(TIMER1_COMPA_vect){
 	updateTime();
+	// llamar parpadear led, si estamos en modo de parpadeo
 	if(getParpadeo()){
 		parpadearLED();
 	}
