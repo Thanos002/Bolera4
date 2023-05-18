@@ -56,9 +56,6 @@ inline void middleInterrupt(){
 	if(state==LANZAMIENTO){  // cambiar de direccion en estado de lanzamiento
 		girarVertical(0);
 	}
-	else{
-		frenoVertical();
-	}
 }
 
 // interrupcion del pulsador a la izquierda

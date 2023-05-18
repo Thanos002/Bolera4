@@ -212,4 +212,8 @@
 #define isHigh(P, B) (PIN##P & (1 << B))
 #define isLow(P, B) (!(PIN##P & (1 << B)))
 
+// funciones equivalentes a set/clear bit, pero tambien usando mascaras para cambiar multiples pines
+#define setBitMask(port, mask) ((port) |= (mask))  // pone un 1 a todos los valores 1 del mask
+#define clearBitMask(port, mask) ((port) &= ~(mask)) // pone un 0 a todos los valores 1 del mask
+
 #endif // IncFile1_h__

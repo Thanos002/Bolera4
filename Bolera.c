@@ -42,7 +42,7 @@ void girarVertical(int dir){
 void frenoVertical(){  // frenado instataneo
 	lanzadorFlag = 2;
 	setBit(M2_bkPORT,M2_bk_X);
-	setBit(M2_enPORT,M4_en_X);
+	clearBit(M2_enPORT,M4_en_X);
 }
 
 void pararVertical(){  // se utiliza para deshabilitar el motor

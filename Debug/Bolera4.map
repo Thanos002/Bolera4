@@ -50,7 +50,7 @@ Discarded input sections
                 0x00000000       0x18 Lanzador.o
  .text.getTime  0x00000000       0x12 Lanzador.o
  .text.LanzadorLoop
-                0x00000000      0x1a0 Lanzador.o
+                0x00000000      0x1a8 Lanzador.o
  .bss.buffer    0x00000000        0x4 Lanzador.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
@@ -246,7 +246,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x6ea
+.text           0x00000000      0x6f8
  *(.vectors)
  .vectors       0x00000000       0xe4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega640/avr5/crtatmega640.o
                 0x00000000                __vector_default
@@ -371,73 +371,73 @@ END GROUP
                 0x0000017c       0x18 Bolera.o
                 0x0000017c                moverVastagoAdelante
  .text.moverVastagoAtras
-                0x00000194       0x12 Bolera.o
+                0x00000194       0x18 Bolera.o
                 0x00000194                moverVastagoAtras
  .text.engancharCarrito
-                0x000001a6       0x12 Bolera.o
-                0x000001a6                engancharCarrito
+                0x000001ac       0x12 Bolera.o
+                0x000001ac                engancharCarrito
  .text.liberarCarrito
-                0x000001b8       0x12 Bolera.o
-                0x000001b8                liberarCarrito
+                0x000001be       0x12 Bolera.o
+                0x000001be                liberarCarrito
  .text.getSensor1
-                0x000001ca       0x18 Bolera.o
-                0x000001ca                getSensor1
+                0x000001d0       0x18 Bolera.o
+                0x000001d0                getSensor1
  .text.getSensor2
-                0x000001e2        0x8 Bolera.o
-                0x000001e2                getSensor2
+                0x000001e8        0x8 Bolera.o
+                0x000001e8                getSensor2
  .text.getSensor3
-                0x000001ea        0xc Bolera.o
-                0x000001ea                getSensor3
+                0x000001f0        0xc Bolera.o
+                0x000001f0                getSensor3
  .text.getSensor4
-                0x000001f6       0x18 Bolera.o
-                0x000001f6                getSensor4
+                0x000001fc       0x18 Bolera.o
+                0x000001fc                getSensor4
  .text.getSensor5
-                0x0000020e       0x14 Bolera.o
-                0x0000020e                getSensor5
+                0x00000214       0x14 Bolera.o
+                0x00000214                getSensor5
  .text.getSensor6
-                0x00000222       0x10 Bolera.o
-                0x00000222                getSensor6
+                0x00000228       0x10 Bolera.o
+                0x00000228                getSensor6
  .text.encenderLED
-                0x00000232        0xc Bolera.o
-                0x00000232                encenderLED
+                0x00000238        0xc Bolera.o
+                0x00000238                encenderLED
  .text.apagarLED
-                0x0000023e        0xc Bolera.o
-                0x0000023e                apagarLED
+                0x00000244        0xc Bolera.o
+                0x00000244                apagarLED
  .text.updateTime
-                0x0000024a       0x28 Lanzador.o
-                0x0000024a                updateTime
- .text.setTime  0x00000272       0x1a Lanzador.o
-                0x00000272                setTime
+                0x00000250       0x28 Lanzador.o
+                0x00000250                updateTime
+ .text.setTime  0x00000278       0x1a Lanzador.o
+                0x00000278                setTime
  .text.getParpadeo
-                0x0000028c        0x6 Lanzador.o
-                0x0000028c                getParpadeo
+                0x00000292        0x6 Lanzador.o
+                0x00000292                getParpadeo
  .text.parpadearLED
-                0x00000292       0x32 Lanzador.o
-                0x00000292                parpadearLED
+                0x00000298       0x32 Lanzador.o
+                0x00000298                parpadearLED
  .text.__vector_11
-                0x000002c4       0x1e Lanzador.o
-                0x000002c4                __vector_11
+                0x000002ca       0x26 Lanzador.o
+                0x000002ca                __vector_11
  .text.__vector_9
-                0x000002e2      0x186 Lanzador.o
-                0x000002e2                __vector_9
- .text.setup    0x00000468       0x74 main.o
-                0x00000468                setup
+                0x000002f0      0x186 Lanzador.o
+                0x000002f0                __vector_9
+ .text.setup    0x00000476       0x74 main.o
+                0x00000476                setup
  .text.timerSetup
-                0x000004dc       0x1e main.o
-                0x000004dc                timerSetup
- .text.main     0x000004fa      0x10e main.o
-                0x000004fa                main
+                0x000004ea       0x1e main.o
+                0x000004ea                timerSetup
+ .text.main     0x00000508      0x10e main.o
+                0x00000508                main
  .text.__vector_17
-                0x00000608       0x9a main.o
-                0x00000608                __vector_17
+                0x00000616       0x9a main.o
+                0x00000616                __vector_17
  .text.libgcc.div
-                0x000006a2       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x000006a2                __udivmodsi4
-                0x000006e6                . = ALIGN (0x2)
+                0x000006b0       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x000006b0                __udivmodsi4
+                0x000006f4                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000006e6        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000006e6                _exit
-                0x000006e6                exit
+ .fini9         0x000006f4        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000006f4                _exit
+                0x000006f4                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -456,11 +456,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000006e6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000006f4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000006ea                _etext = .
+                0x000006f8                _etext = .
 
-.data           0x00800200        0x2 load address 0x000006ea
+.data           0x00800200        0x2 load address 0x000006f8
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -503,8 +503,8 @@ END GROUP
                 0x00800216                s6state
                 0x00800218                s2state
                 0x0080021a                PROVIDE (__bss_end, .)
-                0x000006ea                __data_load_start = LOADADDR (.data)
-                0x000006ec                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000006f8                __data_load_start = LOADADDR (.data)
+                0x000006fa                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080021a        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -589,12 +589,12 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1c24
+.debug_info     0x00000000     0x1c50
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xba9 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega640/avr5/crtatmega640.o
- .debug_info    0x00000ba9      0x259 Bolera.o
- .debug_info    0x00000e02      0x833 Lanzador.o
- .debug_info    0x00001635      0x5ef main.o
+ .debug_info    0x00000ba9      0x26d Bolera.o
+ .debug_info    0x00000e16      0x84b Lanzador.o
+ .debug_info    0x00001661      0x5ef main.o
 
 .debug_abbrev   0x00000000      0xf55
  *(.debug_abbrev)
@@ -603,12 +603,12 @@ END GROUP
  .debug_abbrev  0x00000c0b      0x213 Lanzador.o
  .debug_abbrev  0x00000e1e      0x137 main.o
 
-.debug_line     0x00000000      0xca5
+.debug_line     0x00000000      0xcba
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1ee C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega640/avr5/crtatmega640.o
- .debug_line    0x000001ee      0x2a9 Bolera.o
- .debug_line    0x00000497      0x4d2 Lanzador.o
- .debug_line    0x00000969      0x33c main.o
+ .debug_line    0x000001ee      0x2b0 Bolera.o
+ .debug_line    0x0000049e      0x4e0 Lanzador.o
+ .debug_line    0x0000097e      0x33c main.o
 
 .debug_frame    0x00000000      0x30c
  *(.debug_frame)
